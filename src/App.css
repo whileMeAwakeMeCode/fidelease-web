@@ -167,6 +167,14 @@ textarea:focus, input:focus{
   color: #2aa8f4
 }
 
+.secondary-filled {
+  fill: #00dca8
+}
+
+.primary-filled {
+  fill: #2aa8f4
+}
+
 .bordered {
   border: 1px #00dca8 solid;
   border-radius: 10px;
@@ -253,6 +261,10 @@ textarea:focus, input:focus{
 }
 .height90 {
   height: 90%;
+}
+
+.height95 {
+  height: 95%;
 }
 .hoverscale {
   transition: all ease .5s;
