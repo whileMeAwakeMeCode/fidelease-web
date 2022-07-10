@@ -12,9 +12,10 @@ import { smoothScroll } from './utils';
 import { Fade } from 'react-reveal';
 import { ImMobile } from 'react-icons/im';
 import ProsView from './ProsView';
+import { Snackbar } from './snackbar/Snackbar';
 
 const mainViews = {
-  'commercant': <ProsView />,
+  'commercant': props => <ProsView {...props} />,
   'client': <div></div>,
 }
 
@@ -53,8 +54,11 @@ class App extends React.Component {
     }
   }
 
+  setSnack = snack => this.setState({ snack })
+  closeSnack = () => this.setState({ snack: undefined });
+
   render() {
-    const { loading, videoStarted, mainView } = this.state;
+    const { loading, videoStarted, mainView, snack } = this.state;
 
     return (
       <div className="App flex" ref={section1}>
@@ -119,11 +123,17 @@ class App extends React.Component {
                 mainView
                 ? <div className='app-view' ref={section2}>
                   {
-                    mainViews[mainView]
+                    mainViews[mainView]({ setSnack: this.setSnack })
                   }
                 </div>
                 : null
               }
+              <Snackbar
+                  type={snack?.type || 'success'}
+                  closeSnack={this.closeSnack}
+              >
+                  { snack?.content }
+              </Snackbar>
           </div>
           
         }

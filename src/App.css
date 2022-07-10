@@ -113,6 +113,13 @@ textarea:focus, input:focus{
   justify-content: center;
 }
 
+.flexy {
+  display : flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
 
 .flexdot1 {
   flex: .1
@@ -239,9 +246,20 @@ textarea:focus, input:focus{
   font-size: 2vw;
   letter-spacing: 2px;
 }
-
+.width20 {
+  width: 20%;
+}
+.width30 {
+  width: 30%;
+}
+.width40 {
+  width: 40%;
+}
 .width50 {
   width: 50%;
+}
+.width60 {
+  width: 60%;
 }
 
 .width80 {
@@ -397,7 +415,9 @@ textarea:focus, input:focus{
 .marged-t {
   margin: 2% 0 0 0;
 }
-
+.marged-b {
+  margin-bottom: 2%;
+}
 
 
 .marged1 {
@@ -457,10 +477,10 @@ textarea:focus, input:focus{
 .app-input {
   padding: 5px 15px;
   font-size: larger;
-  margin: 5px 0 2% 0;
+  /* margin-top: 2%; */
   /* width: 80%; */
   border-radius: 10px;
-  border: 1px transparent solid;
+  border: 1px silver solid;
 }
 
 textarea.app-input {
@@ -693,7 +713,7 @@ textarea.app-input {
 }
 
 .underlined {
-  border-bottom: 1px solid #2aa8f4  /*00dca8*/;
+  border-bottom: 3px solid #2aa8f4  /*00dca8*/;
   margin-bottom: 2%;
   padding-bottom: 1%;
 }
