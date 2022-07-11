@@ -717,3 +717,12 @@ textarea.app-input {
   margin-bottom: 2%;
   padding-bottom: 1%;
 }
+
+.app-footer {
+  height: 50vh;
+  width: 100vw;
+  background:#323232;
+  color: #fff;
+  
+
+}

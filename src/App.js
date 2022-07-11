@@ -13,10 +13,12 @@ import { Fade } from 'react-reveal';
 import { ImMobile } from 'react-icons/im';
 import ProsView from './ProsView';
 import { Snackbar } from './snackbar/Snackbar';
+import { Footer } from './Footer';
+import ClientsView from './ClientsView';
 
 const mainViews = {
   'commercant': props => <ProsView {...props} />,
-  'client': <div></div>,
+  'client': props => <ClientsView {...props} />,
 }
 
 const IamButton = ({title, onClick}) => <button onClick={onClick} className='app-button' style={{width: '20vw'}}><span className='smaller'>JE SUIS</span> <br/><span className='bold title'> {title} </span></button>
@@ -57,6 +59,18 @@ class App extends React.Component {
   setSnack = snack => this.setState({ snack })
   closeSnack = () => this.setState({ snack: undefined });
 
+  setProMainView = () => {
+    this.setState({ mainView: 'commercant' });
+    setTimeout(() => smoothScroll(section2));
+    
+  }
+
+  setClientMainView = () => {
+    this.setState({ mainView: 'client' });
+    setTimeout(() => smoothScroll(section2));
+    
+  }
+
   render() {
     const { loading, videoStarted, mainView, snack } = this.state;
 
@@ -96,18 +110,8 @@ class App extends React.Component {
                 </div>
                 
                 <div className='flex row spaceevenly width80'>
-                  <IamButton title="COMMERÇANT" onClick={() => {
-                    this.setState({ mainView: 'commercant' });
-
-                    setTimeout(() => smoothScroll(section2))
-                    
-                  }} />
-                  <IamButton title="CLIENT" onClick={() => {
-                    this.setState({ mainView: 'client' })
-                    // smoothScroll(section2)
-                    setTimeout(() => smoothScroll(section2))
-
-                  }} />
+                  <IamButton title="COMMERÇANT" onClick={this.setProMainView} />
+                  <IamButton title="CLIENT" onClick={this.setClientMainView} />
                 </div>
   
                 <div> 
@@ -128,6 +132,7 @@ class App extends React.Component {
                 </div>
                 : null
               }
+              <Footer />
               <Snackbar
                   type={snack?.type || 'success'}
                   closeSnack={this.closeSnack}

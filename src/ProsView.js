@@ -25,45 +25,47 @@ import { secondary, section3, section4 } from "./constants";
 import { fetchApi, smoothScroll } from './utils';
 import Button from "./Button";
 import React from "react";
+import { ItemRow } from "./ItemRow";
+import { Input } from "./Input";
 
 
-const Check = () => <BsCheckLg color={secondary} />
-const Uncheck = () => <MdOutlineClose size={30} color='red' />
-const Input = ({
-    icon,
-    inputProps,
-    wrapperClassName
-}) => <div className={`flexy row ${wrapperClassName||''}`} style={{marginTop: '2%'}}>
-    <input {...inputProps} />
-    {
-        icon
-        ? <span style={{marginLeft: '-3%'}}>{ icon || null }</span>
-        : null
-    }
-</div>
+// const Check = () => <BsCheckLg color={secondary} />
+// const Uncheck = () => <MdOutlineClose size={30} color='red' />
+// const Input = ({
+//     icon,
+//     inputProps,
+//     wrapperClassName
+// }) => <div className={`flexy row ${wrapperClassName||''}`} style={{marginTop: '2%'}}>
+//     <input {...inputProps} />
+//     {
+//         icon
+//         ? <span style={{marginLeft: '-3%'}}>{ icon || null }</span>
+//         : null
+//     }
+// </div>
 
-const ItemRow = ({
-    title,
-    icon,
-    checks,
-    keyValue
-}) => <div key={keyValue} className="flex row allspace" style={{ height: '5vh'}}>
-    <div className="flex row flexdot4 justifystart">{icon} &nbsp; { title }</div>
-    <div className="flex flexdot3" style={{borderRight: '1px solid silver', borderLeft: '1px solid silver'}}>
-        {
-            checks[0]
-            ? <Check />
-            : <Uncheck />
-        }
-    </div>
-    <div className="flex flexdot3">
-        {
-            checks[1]
-            ? <Check />
-            : <Uncheck />
-        }
-    </div>
-</div>
+// const ItemRow = ({
+//     title,
+//     icon,
+//     checks,
+//     keyValue
+// }) => <div key={keyValue} className="flex row allspace" style={{ height: '5vh'}}>
+//     <div className="flex row flexdot4 justifystart">{icon} &nbsp; { title }</div>
+//     <div className="flex flexdot3" style={{borderRight: '1px solid silver', borderLeft: '1px solid silver'}}>
+//         {
+//             checks[0]
+//             ? <Check />
+//             : <Uncheck />
+//         }
+//     </div>
+//     <div className="flex flexdot3">
+//         {
+//             checks[1]
+//             ? <Check />
+//             : <Uncheck />
+//         }
+//     </div>
+// </div>
 
 /* SECTION 2 */
 
@@ -203,7 +205,7 @@ class ProsView extends React.Component {
                                 <p>À l'ouverture de l'application, le client renseigne son adresse email et c'est tout... une carte de fidélité dématérialisée est automatiquement créé et vous pouvez tout de suite la créditer, même sans réseau internet !</p>
                                 <p>
                                     Les plus récalcitrants pourront toujours profiter des cartes physiques uniques pré-imprimées 
-                                    <i className="silver smaller">(offert pour la souscription à une licence professionnelle)</i>.
+                                    <i className="silver smaller"> (offert pour la souscription à une licence professionnelle)</i>.
                                     <br />
                                     L'utilisation reste la même qu'avec une carte classique à la différence que le client ne pourra pas transférer ses points à d'autres membres du réseau.
                                 </p> 
@@ -298,7 +300,7 @@ class ProsView extends React.Component {
                     <div className="xxlarge flex flexdot6 bold" style={{marginTop: '2vw'}}><span className="underlined"> Demande de compte testeur</span></div> 
                 </div>
                 <p className="title">
-                    <span className="xlarge">Testez tout Fidelease gratuitement pendant 14 jours,</span>
+                    <span className="xlarge">Testez la licence professionnelle Fidelease gratuitement pendant 14 jours,</span>
                     <br />
                     <span className="grey smaller"> Aucune installation spécifique n'est requise. Une fois le compte créé, l'utilisation est instantanée.</span>
 
@@ -306,7 +308,7 @@ class ProsView extends React.Component {
 
                 <div className="flexy alignstart width80">
                 <div className="flexy allwidth marged-t">Pour en profiter, veuillez remplir le formulaire suivant :</div>
-                    <Input 
+                    <Input
                         wrapperClassName="flexy allwidth"
                         inputProps={{
                             placeholder: 'Dénomination de votre entreprise',
