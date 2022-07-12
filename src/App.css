@@ -499,10 +499,12 @@ textarea.app-input {
 }
 
 .app-modal-popup {
+  position: absolute;
   top: 0;
   background: rgba(0,0,0,.8);
   padding: 10vh 15vw;
   width: 70vw;
+  height: 80vh;
   border: 1px solid #303030;
 }
 

@@ -7,7 +7,7 @@ import appstore from './images/appstore.png';
 import playstore from './images/playstore.png';
 
 
-import { section1, section2 } from './constants';
+import { section1, section2, section4 } from './constants';
 import { smoothScroll } from './utils';
 import { Fade } from 'react-reveal';
 import { ImMobile } from 'react-icons/im';
@@ -15,6 +15,8 @@ import ProsView from './ProsView';
 import { Snackbar } from './snackbar/Snackbar';
 import { Footer } from './Footer';
 import ClientsView from './ClientsView';
+import Button from './Button';
+import { Scanner } from './Scanner';
 
 const mainViews = {
   'commercant': props => <ProsView {...props} />,
@@ -59,9 +61,9 @@ class App extends React.Component {
   setSnack = snack => this.setState({ snack })
   closeSnack = () => this.setState({ snack: undefined });
 
-  setProMainView = () => {
+  setProMainView = (opt) => {
     this.setState({ mainView: 'commercant' });
-    setTimeout(() => smoothScroll(section2));
+    setTimeout(() => smoothScroll(opt?.section || section2));
     
   }
 
@@ -71,8 +73,11 @@ class App extends React.Component {
     
   }
 
+  setTesterView = () => this.setProMainView({ section: section4 })
+
+  setPopup = popup => this.setState({ popup })
   render() {
-    const { loading, videoStarted, mainView, snack } = this.state;
+    const { loading, popup, mainView, snack } = this.state;
 
     return (
       <div className="App flex" ref={section1}>
@@ -92,12 +97,26 @@ class App extends React.Component {
                 <source src={homeVideo} type="video/mp4"/>
               </video>
               <div className="flex" style={{position: 'absolute', top: 0, left: 0, height: '100vh', width: '100vw', color: '#fff'}}>
-                <div className='flex'>
-                  <img 
-                    src={logoWhite}
-                    style={{ height: '25vh', width: 'auto', objectFit: 'contain' }}
-                    className="img-shadow"
-                  />
+                <div className='flex allwidth row allheight marged-t'>
+                  <div className='flex'>
+                  </div>
+                  <div className='flex'>
+                    <img 
+                      src={logoWhite}
+                      style={{ height: '25vh', width: 'auto', objectFit: 'contain' }}
+                      className="img-shadow"
+                    />
+                  </div>
+                  <div className='flex row selfstart'>
+                    <Button
+                      title="Vérifier Solde"
+                      className="smaller"
+                      onClick={() => this.setPopup(<Scanner />)}
+                    />
+                    <div className='hoverscale'></div>
+                    <div className='hoverscale'></div>
+                  </div>
+                 
                 </div>
                 <div className='flex'>
   
@@ -132,13 +151,32 @@ class App extends React.Component {
                 </div>
                 : null
               }
-              <Footer />
+              <Footer 
+                setClientMainView={this.setClientMainView.bind(this)}
+                setProMainView={this.setProMainView.bind(this)}
+                setTesterView={this.setTesterView}
+              />
               <Snackbar
                   type={snack?.type || 'success'}
                   closeSnack={this.closeSnack}
               >
                   { snack?.content }
               </Snackbar>
+
+              {
+                popup
+                ? <div className="app-modal-popup">
+                    {
+                      popup
+                    }
+
+                    <Button
+                      title="Ok"
+                      onClick={() => this.setState({ popup: undefined })}
+                    />
+                </div>
+                : null
+              }
           </div>
           
         }
