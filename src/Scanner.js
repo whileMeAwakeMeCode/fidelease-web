@@ -4,7 +4,7 @@ import { BsShieldCheck } from 'react-icons/bs';
 import { QrReader } from 'react-qr-reader';
 import Button from './Button';
 import { secondary } from './constants';
-import { fetchApi, isJSON, plural } from './utils';
+import { fetchApi, isJSON, isUuidV4, plural } from './utils';
 import physicalCard from './images/physical_card.png';
 
 export class Scanner extends Component {
@@ -27,8 +27,8 @@ export class Scanner extends Component {
 
         try {
             const { card: scannedCard } = isJSON(data) || {};
-
-            if (this.state.scanning && scannedCard && !this.state.fetchinBalance) {
+            console.log('scannedCard', scannedCard);
+            if (this.state.scanning && scannedCard && !this.state.fetchinBalance && await isUuidV4(scannedCard)) {
                 this.setState({ scanning: false, fetchingBalances: true })
                 // get data about card with api request GET_UNCONFIRMED_BALANCE_OF
                 const { response: scannedCardBalances, error, status } = await fetchApi({
@@ -42,7 +42,7 @@ export class Scanner extends Component {
                 console.log('GET_UNCONFIRMED_BALANCE_OF', { scannedCardBalances, error, status })
 
                 // ?
-                scannedCard && this.setState({ scannedCard, scannedCardBalances, scanning: false, fetchingBalances: false });
+                scannedCard && this.setState({ scannedCard, scannedCardBalances, fetchingBalances: false });
             }
         }catch(e) {
             this.setState({ scanning: false, scanError: true, fetchingBalances: false })
@@ -57,7 +57,7 @@ export class Scanner extends Component {
     render() {
         const { scanning, fetchingBalances, scanError, scannedCard, scannedCardBalances, minCies } = this.state;
         const cieIds = Object.keys(scannedCardBalances||{});
-        
+        console.log('scanning ?', scanning);
         return <div className='flex allheight whitebg justifystart padded1'>
             
             <div className='flexy row allwidth'>
@@ -119,13 +119,8 @@ export class Scanner extends Component {
                             scanning
                             ? <QrReader
                                 onResult={(result, error) => {
-                                if (!!result) {
-                                    this.setData(result?.text);
-                                }
-        
-                                // if (!!error) {
-                                //     console.info(error);
-                                // }
+                                    if (!!result && !this.state.scannedCard) 
+                                        this.setData(result?.text);
                                 }}
                                 style={{ width: '100%', height: '100%' }}
                             />
@@ -147,7 +142,7 @@ export class Scanner extends Component {
                                             onClick={() => this.setState({ scanError: undefined, scanning: true })}
                                         />
                                     </div>
-                                    : null
+                                    : 'YEAH'
                                 )
                             )
                         }

@@ -78,3 +78,8 @@ export const fetchApi = async(fetchConfig, options) => {
 }
 
 export const plural = (total, expression) => `${expression}${(parseInt(total)>1) ? 's' : ''}`
+
+export const isUuidV4 = async uuidStr => (
+    (uuidStr?.length === 36)
+    && uuidStr.split('-').length === 5
+)

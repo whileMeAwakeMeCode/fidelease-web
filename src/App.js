@@ -30,8 +30,9 @@ class App extends React.Component {
 
   state = {
     loading: true,
-    mainView: undefined,
-    videoStarted: false
+    videoStarted: false,
+    mainView: 'client',
+    
   }
 
   componentDidMount() {
@@ -79,6 +80,12 @@ class App extends React.Component {
 
   setPopup = popup => this.setState({ popup })
 
+  openScanner = () => {
+    this.setPopup(<Scanner />);
+
+    setTimeout(() => smoothScroll(section1))
+  }
+
   render() {
     const { loading, popup, mainView, snack } = this.state;
 
@@ -114,7 +121,7 @@ class App extends React.Component {
                     <Button
                       title="Vérifier Solde"
                       className="smaller"
-                      onClick={() => this.setPopup(<Scanner />)}
+                      onClick={this.openScanner}
                     />
                     <div className='hoverscale'></div>
                     <div className='hoverscale'></div>
@@ -146,44 +153,56 @@ class App extends React.Component {
   
               {/* APP VIEW */}
               {
-                mainView
-                ? <div className='app-view' ref={section2}>
-                  {
-                    mainViews[mainView]({ setSnack: this.setSnack })
-                  }
-                </div>
-                : null
-              }
-              <Footer 
-                setClientMainView={this.setClientMainView.bind(this)}
-                setProMainView={this.setProMainView.bind(this)}
-                setTesterView={this.setTesterView}
-              />
-              <Snackbar
-                  type={snack?.type || 'success'}
-                  closeSnack={this.closeSnack}
-              >
-                  { snack?.content }
-              </Snackbar>
-
-              {
                 popup
-                ? <div className="app-modal-popup">
-                    {
-                      popup
-                    }
-
-                    <Button
-                      title="Fermer"
-                      onClick={() => this.setState({ popup: undefined })}
-                      buttonStyle={{width: '15vw', marginTop: '1%'}}
-                    />
-                </div>
-                : null
+                ? null
+                : <>
+                
+                  
+                  
+                  {
+                    mainView
+                    ? <div className='app-view' ref={section2}>
+                      {
+                        mainViews[mainView]({ setSnack: this.setSnack })
+                      }
+                    </div>
+                    : null
+                  }
+                  <Footer 
+                    setClientMainView={this.setClientMainView.bind(this)}
+                    setProMainView={this.setProMainView.bind(this)}
+                    setTesterView={this.setTesterView}
+                    openScanner={this.openScanner.bind(this)}
+                  />
+                  
+                </>
               }
           </div>
           
         }
+
+<Snackbar
+                      type={snack?.type || 'success'}
+                      closeSnack={this.closeSnack}
+                  >
+                      { snack?.content }
+                  </Snackbar>
+
+                  {
+                    popup
+                    ? <div className="app-modal-popup">
+                        {
+                          popup
+                        }
+
+                        <Button
+                          title="Fermer"
+                          onClick={() => this.setState({ popup: undefined })}
+                          buttonStyle={{width: '15vw', marginTop: '1%'}}
+                        />
+                    </div>
+                    : null
+                  }
       </div>
     );
   }

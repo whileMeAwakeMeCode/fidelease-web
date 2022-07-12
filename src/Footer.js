@@ -17,6 +17,7 @@ export const Footer = (props) => {
                     
                     <div className='flex flexdot2 clickable hoverscale'>Protection de la vie privée</div>
                     <div className='flex flexdot2 clickable hoverscale'>Conditions d'utilisation</div>
+                    <div className='flex flexdot2 clickable hoverscale' onClick={props.openScanner}>Soldes carte physique</div>
                     <div className='flex flexdot2 clickable hoverscale'>Contact</div>
                     <div className="flex">
                         <div className='white title'>Suivez-nous !</div>
