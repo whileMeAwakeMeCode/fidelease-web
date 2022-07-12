@@ -10,8 +10,8 @@ export const ItemRow = ({
     title,
     icon,
     checks,
-    keyValue
-}) => <div key={keyValue} className="flex row allspace" style={{ height: '5vh'}}>
+    //keyValue
+}) => <div  className="flex row allspace" style={{ height: '5vh'}}>
     <div className="flex row flexdot4 justifystart">{icon} &nbsp; { title }</div>
     <div className="flex flexdot3" style={{borderRight: '1px solid silver', borderLeft: '1px solid silver'}}>
         {

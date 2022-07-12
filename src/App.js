@@ -63,7 +63,9 @@ class App extends React.Component {
 
   setProMainView = (opt) => {
     this.setState({ mainView: 'commercant' });
-    setTimeout(() => smoothScroll(opt?.section || section2));
+    const section = opt?.section || section2;
+    console.log('GOING TO SECTION', section);
+    setTimeout(() => smoothScroll(section), 100);
     
   }
 
@@ -76,6 +78,7 @@ class App extends React.Component {
   setTesterView = () => this.setProMainView({ section: section4 })
 
   setPopup = popup => this.setState({ popup })
+
   render() {
     const { loading, popup, mainView, snack } = this.state;
 
@@ -171,8 +174,9 @@ class App extends React.Component {
                     }
 
                     <Button
-                      title="Ok"
+                      title="Fermer"
                       onClick={() => this.setState({ popup: undefined })}
+                      buttonStyle={{width: '15vw', marginTop: '1%'}}
                     />
                 </div>
                 : null

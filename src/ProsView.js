@@ -21,7 +21,7 @@ import txsView from './images/txs_view.png';
 
 
 
-import { secondary, section3, section4 } from "./constants";
+import { secondary, section2, section3, section4 } from "./constants";
 import { fetchApi, smoothScroll } from './utils';
 import Button from "./Button";
 import React from "react";
@@ -114,7 +114,7 @@ class ProsView extends React.Component {
         } = tester;
 
 
-        return <div className="flex screensize">
+        return <div ref={section2} className="flex screensize">
             <div className='screensize flex'>
         
                 <div className='flex row allwidth height95'>
@@ -165,7 +165,7 @@ class ProsView extends React.Component {
                                                 { title: "Cartes oubliées créditables", checks: [0,1], icon: <TbCreditCardOff /> },
                                                 
                                             ].map((item, itemi) => <ItemRow 
-                                                keyValue={`prosview_item_${itemi}`} 
+                                                key={`prosview_item_${itemi}`} 
                                                 {...item}    
                                             />)
                                         }
@@ -193,7 +193,7 @@ class ProsView extends React.Component {
                 </div>
             </div>
 
-            {/* SECTION 2 */}
+            {/* SECTION 3 */}
             <div className='screensize flex justifystart' ref={section3} style={{background: '#404040', color: '#fff', paddingTop: 20, paddingBottom: 40}}>
                 {/* <div className="marged-t">Comment ça marche ?</div> */}
                 <Fade right>

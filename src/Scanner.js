@@ -5,6 +5,7 @@ import { QrReader } from 'react-qr-reader';
 import Button from './Button';
 import { secondary } from './constants';
 import { fetchApi, isJSON, plural } from './utils';
+import physicalCard from './images/physical_card.png';
 
 export class Scanner extends Component {
     state = {
@@ -14,12 +15,12 @@ export class Scanner extends Component {
     async componentDidMount() {
         const { error, response, status } = await fetchApi({
             method: 'GET',
-            route: 'COMPANIES_NAMES',
+            route: 'MIN_COMPANIES',
         });
 
-        console.log('companiesNames', {error, response, status});
+        console.log('minCies', {error, response, status});
 
-        this.setState({ scanning: true, companiesNames: response })
+        this.setState({ scanning: true, minCies: response })
     }
 
     setData = async data => {
@@ -48,32 +49,70 @@ export class Scanner extends Component {
         }
     }
 
+    openCompanyDetails = (e) => {
+        /* TODO */
+        e.preventDefault();
+    }
+
     render() {
-        const { scanning, fetchingBalances, scanError, scannedCard, scannedCardBalances, companiesNames } = this.state;
+        const { scanning, fetchingBalances, scanError, scannedCard, scannedCardBalances, minCies } = this.state;
         const cieIds = Object.keys(scannedCardBalances||{});
         
-        return <div className='flex allheight whitebg justifystart'>
-            <p className='title'>
-                {
-                    scanError
-                    ? 'ERREUR DE SCAN'
-                    : (
+        return <div className='flex allheight whitebg justifystart padded1'>
+            
+            <div className='flexy row allwidth'>
+                <img src={physicalCard} className="flex" style={{width: 'auto', height: '15vh', objectFit: 'contain'}} />
+
+                <div className="flex">
+                    <p className='title'>
+                        {
+                            scanError
+                            ? 'ERREUR DE SCAN'
+                            : (
+                                scannedCard
+                                ? `CARTE n°${scannedCard?.split('-')[0]}`
+                                : 'SCANNEZ VOTRE CARTE DE FIDÉLITÉ'
+                            )
+                        }
+                    </p>
+                    {
                         scannedCard
-                        ? `CARTE n°${scannedCard?.split('-')[0]}`
-                        : 'SCANNEZ VOTRE CARTE DE FIDÉLITÉ'
-                    )
-                }
-            </p>
+                        ? <>
+                            <BsShieldCheck color={secondary} />
+                            Cette carte est valide
+                        </>
+                        : null
+                    }
+                    
+                </div>
+            </div>
             {
                     scannedCard
-                    ? <div className="flex">
-                        <BsShieldCheck color={secondary} />
-                        Cette carte est valide
-                        {
-                            cieIds?.length
-                            ? cieIds.map(cieId => <div className='allwidth flex row'><span className="title">{(companiesNames||{})[cieId]}</span> : {scannedCardBalances[cieId]} {plural(scannedCardBalances[cieId], 'point')}</div>)
-                            : null
-                        }
+                    ? <div className="flex allwidth">
+                        <div className="flexy row allwidth marged-t" style={{borderBottom: '1px solid silver', borderTop: '1px solid silver', paddingBottom: '1%'}}>
+                            <div className="flex flexdot4 bold" style={{borderRight: '1px solid silver'}}>Commerçant</div>
+                            <div className="flex flexdot4 bold">Votre solde</div>
+                        </div>
+                        <div className='flex allspace justifystart'>
+                            {
+                                cieIds?.length
+                                ? cieIds.map((cieId, ciei) => <div key={`scanner_cie_${ciei}`} className='allwidth flexy row' style={{borderBottom: '1px solid silver'}}>
+                                    <div className='flex flexdot5 allwidth' style={{borderRight: '1px solid silver'}}>
+                                        <img
+                                            src={(minCies||{})[cieId]?.logo}
+                                            style={{
+                                                height: '10vh', width: '10vw', objectFit: 'contain'
+                                            }}
+                                            className="clickable hoverscale"
+                                            onClick={this.openCompanyDetails}
+                                        />
+                                        <span className="title">{(minCies||{})[cieId]?.name}</span>
+                                    </div>
+                                    <p className='flexy flexdot5 bold title'>{scannedCardBalances[cieId]} {plural(scannedCardBalances[cieId], 'point')}</p>
+                                </div>)
+                                : null
+                            }
+                        </div>
                     </div>
                     : <div style={{height: '25vh', width: '30vw'}}>
                         {
