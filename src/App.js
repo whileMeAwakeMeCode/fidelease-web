@@ -156,9 +156,6 @@ class App extends React.Component {
                 popup
                 ? null
                 : <>
-                
-                  
-                  
                   {
                     mainView
                     ? <div className='app-view' ref={section2}>
@@ -174,35 +171,33 @@ class App extends React.Component {
                     setTesterView={this.setTesterView}
                     openScanner={this.openScanner.bind(this)}
                   />
-                  
                 </>
               }
           </div>
-          
         }
 
-<Snackbar
-                      type={snack?.type || 'success'}
-                      closeSnack={this.closeSnack}
-                  >
-                      { snack?.content }
-                  </Snackbar>
+        <Snackbar
+            type={snack?.type || 'success'}
+            closeSnack={this.closeSnack}
+        >
+            { snack?.content }
+        </Snackbar>
 
-                  {
-                    popup
-                    ? <div className="app-modal-popup">
-                        {
-                          popup
-                        }
+        {
+          popup
+          ? <div className="app-modal-popup">
+              {
+                popup
+              }
 
-                        <Button
-                          title="Fermer"
-                          onClick={() => this.setState({ popup: undefined })}
-                          buttonStyle={{width: '15vw', marginTop: '1%'}}
-                        />
-                    </div>
-                    : null
-                  }
+              <Button
+                title="Fermer"
+                onClick={() => this.setState({ popup: undefined })}
+                buttonStyle={{width: '15vw', marginTop: '1%'}}
+              />
+          </div>
+          : null
+        }
       </div>
     );
   }

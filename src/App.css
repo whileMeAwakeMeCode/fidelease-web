@@ -182,6 +182,10 @@ textarea:focus, input:focus{
   fill: #2aa8f4
 }
 
+.inverted-img {
+  filter: invert();
+}
+
 .bordered {
   border: 1px #00dca8 solid;
   border-radius: 10px;
