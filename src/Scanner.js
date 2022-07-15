@@ -26,18 +26,21 @@ export class Scanner extends Component {
     setData = async data => {
 
         try {
-            const { card: scannedCard } = isJSON(data) || {};
-            console.log('scannedCard', scannedCard);
-            if (this.state.scanning && scannedCard && !this.state.fetchinBalance && await isUuidV4(scannedCard)) {
+            // TODO HERE : pass encrypted `data` that server can decrypt `data.card` !
+            //const { card: scannedCard } = isJSON(data) || {};
+            //console.log('scannedCard', scannedCard);
+            if (this.state.scanning && /*scannedCard &&*/ !this.state.fetchinBalance/* && await isUuidV4(scannedCard)*/) {
                 this.setState({ scanning: false, fetchingBalances: true })
                 // get data about card with api request GET_UNCONFIRMED_BALANCE_OF
-                const { response: scannedCardBalances, error, status } = await fetchApi({
+                const { response: scannedCardData, error, status } = await fetchApi({
                     method: 'POST',
                     route: 'GET_UNCONFIRMED_BALANCE_OF',
                     body: {
-                        card: scannedCard
+                        card: data//scannedCard
                     }
                 });
+
+                const { scannedCardBalances, scannedCard } = scannedCardData || {};
 
                 console.log('GET_UNCONFIRMED_BALANCE_OF', { scannedCardBalances, error, status })
 
@@ -119,6 +122,10 @@ export class Scanner extends Component {
                             scanning
                             ? <QrReader
                                 onResult={(result, error) => {
+                                    error 
+                                    ? console.log('scan error')
+                                    : console.log('scan result', result);
+
                                     if (!!result && !this.state.scannedCard) 
                                         this.setData(result?.text);
                                 }}

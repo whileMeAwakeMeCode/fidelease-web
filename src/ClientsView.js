@@ -66,7 +66,13 @@ export default class ClientsView extends Component {
                     </Fade>
                     <Fade right>  
                         <div className='flex flexdot5 allheight padded1'>
-                            <div className='flex title xxxlarge flexdot1'><span className="smaller">Une seule carte de fidélité pour plusieurs commerçes,</span><br />Profitez de la fidélisation 2.0 !</div>
+                            <div className='flex title xxxlarge flexdot1'>
+                                <div className="smaller">Une seule carte de fidélité pour plusieurs commerçes,</div>
+                                <div className="smaller">Des offres et des promos diversifiées toute l'année,</div>
+                                
+                                <br />
+                                <div>Profitez de la fidélisation 2.0 !</div>
+                            </div>
                             <div className='flex flexdot9 justifystart allheight width95'>
                                 {/* <ImMobile /> */}
                                 {/* TABLE */}
