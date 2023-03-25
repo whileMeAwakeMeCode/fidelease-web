@@ -210,6 +210,13 @@ class ProsView extends React.Component {
                                     L'utilisation reste la même qu'avec une carte classique à la différence que le client ne pourra pas transférer ses points à d'autres membres du réseau.
                                 </p> 
                                 <p>Du point de vue du commerçant, le qr-code est scanné de la même manière qu'avec l'application.</p>
+                               
+                                {/* V2 */}
+                                {/* <p>Vous souhaitez fidéliser vos clients de manière simple et efficace ? Fidelease est l'outil qu'il vous faut !</p>
+                                <p>En proposant à vos clients de télécharger notre application mobile, vous leur donnez accès à une carte de fidélité dématérialisée qui leur permet de cumuler des points et des offres uniques dans votre établissement. Et le meilleur ? Ils n'ont même pas besoin de se connecter à internet pour en profiter !</p>
+                                <p>Pour les clients récalcitrants, vous pouvez également leur proposer des cartes physiques pré-imprimées, tout aussi simples à utiliser <i className="silver smaller"> (offert pour la souscription à une licence professionnelle)</i>.</p>
+                                <p>De votre côté, il vous suffit de scanner le QR code de la carte de fidélité avec notre application pour créditer les points de vos clients.</p>
+                                <p>Alors n'hésitez plus, souscrivez à une licence professionnelle Fidelease et offrez à vos clients une expérience de fidélisation innovante et efficace.</p> */}
                             </div>
                         </div>
                         <div className="flex">
