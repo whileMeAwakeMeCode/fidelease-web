@@ -1,3 +1,5 @@
+import Layout from "./Layout";
+
 export const Input = ({
     icon,
     inputProps,
@@ -6,7 +8,7 @@ export const Input = ({
     <input {...inputProps} />
     {
         icon
-        ? <span style={{marginLeft: '-3%'}}>{ icon || null }</span>
+        ? <span style={{marginLeft: Layout.isSmallDevice ? '-5%' : '-3%'}}>{ icon || null }</span>
         : null
     }
 </div>

@@ -12,15 +12,15 @@ export const ItemRow = ({
     checks,
     //keyValue
 }) => <div className="flex row allspace" style={{ height: '5vh'}}>
-    <div className="flex row flexdot4 justifystart">{icon} &nbsp; { title }</div>
-    <div className="flex flexdot3" style={{borderRight: '1px solid silver', borderLeft: '1px solid silver'}}>
+    <div className="flex row flexdot6 justifystart">{icon} &nbsp; { title }</div>
+    <div className="flex flexdot2" style={{borderRight: '1px solid silver', borderLeft: '1px solid silver'}}>
         {
             checks[0]
             ? <Check />
             : <Uncheck />
         }
     </div>
-    <div className="flex flexdot3">
+    <div className="flex flexdot2">
         {
             checks[1]
             ? <Check />

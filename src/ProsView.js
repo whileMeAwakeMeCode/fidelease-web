@@ -27,6 +27,7 @@ import Button from "./Button";
 import React from "react";
 import { ItemRow } from "./ItemRow";
 import { Input } from "./Input";
+import Layout from "./Layout";
 
 
 /* SECTION 2 */
@@ -74,20 +75,21 @@ class ProsView extends React.Component {
         return <div ref={section2} className="flex screensize">
             <div className='screensize flex'>
         
-                <div className='flex row allwidth height95'>
+                {/* <div className='flex row allwidth height95'> */}
+                <div className={`flex allwidth ${Layout.isSmallDevice ? '' : 'row height95'}`}>
                     <Fade left>  
                     
                         <div className='flex flexdot4 justifystart allheight'>
                             <div className='title flexdot3 text-shadow height90 justifystart'>
                                 <div className="flex"> 
-                                    <img alt='' className="img-shadow" src={fLogo} style={{ width: '5vw', height: 'auto', objectFit: 'contain' }} /> 
+                                    <img alt='' className="img-shadow" src={fLogo} style={{ width: Layout.isSmallDevice ? '10vw' : '5vw', height: 'auto', objectFit: 'contain' }} /> 
                                     {/* FIDELEASE */}
-                                    <img alt='' src={fText} style={{ width: '10vw', height: 'auto', objectFit: 'contain' }} />
+                                    <img alt='' src={fText} style={{ width: Layout.isSmallDevice ? '20vw' : '10vw', height: 'auto', objectFit: 'contain' }} />
                                 </div> 
                                 <span className="primary">LICENCE PROFESSIONNELLE</span>
                             </div>
                             <div className="flex flexdot6" style={{marginTop: '7%'}}>
-                                <img alt='' src={mobileApp} style={{ height: '50vh', width: 'auto', objectFit: 'contain', marginLeft: '-20%' }} />
+                                <img alt='' src={mobileApp} style={{ height: Layout.isSmallDevice ? '30vh' : '50vh', width: 'auto', objectFit: 'contain', marginLeft: Layout.isSmallDevice ? '' : '-20%' }} />
                             </div>
                         </div>
                     </Fade>
@@ -97,12 +99,12 @@ class ProsView extends React.Component {
                             <div className='flex flexdot9 justifystart allheight width95'>
                                 {/* <ImMobile /> */}
                                 {/* TABLE */}
-                                <div className='flex allwidth height80'>
+                                <div className={`flex height80 ${Layout.isSmallDevice ? 'width90' : 'allwidth'}`}>
                                     <div className="bordered marged-t allwidth soft-bg box-shadow">
-                                        <div className="flex row allwidth" style={{borderBottom: '1px solid silver', paddingBottom: '1%'}}>
-                                            <div className="flex flexdot4 bold">Options</div>
-                                            <div className="flex flexdot3 bold" style={{borderRight: '1px solid silver', borderLeft: '1px solid silver'}}>Fidélisation classique</div>
-                                            <div className="flex flexdot3 bold">Programme Fidelease</div>
+                                        <div className="flex row allwidth" style={{borderBottom: '1px solid silver', paddingBottom: '1%', fontSize: Layout.isSmallDevice ? 'x-small' : ''}}>
+                                            <div className="flex flexdot6 bold">Options</div>
+                                            <div className="flex flexdot2 bold" style={{borderRight: '1px solid silver', borderLeft: '1px solid silver'}}>Fidélisation classique</div>
+                                            <div className="flex flexdot2 bold">Programme Fidelease</div>
                                         </div>
 
                                         {/* ItemRow */}
@@ -144,7 +146,7 @@ class ProsView extends React.Component {
                     <Button
                         title="En savoir plus"
                         icon={<TiInfoLargeOutline />}
-                        className="app-button marged-t xlarge"
+                        className={`app-button marged-t xlarge ${Layout.isSmallDevice ? 'marged-b' : ''}`}
                         onClick={() => smoothScroll(section3)}
                     />
                 </div>
@@ -157,6 +159,16 @@ class ProsView extends React.Component {
                     <div className="flex row width95">
                         <div className="flex">
                             <div className="xxlarge bold underlined">Adoption clients</div> 
+                            {
+                                Layout.isSmallDevice
+                                ? <div className="flex">
+                                    <Fade right>
+                                        <img alt='' className="img-shadow" src={sticker} style={{ height: 'auto', width: '50vw', objectFit: 'contain' }} />
+                                        <img alt='' className="img-shadow" src={physicalCard} style={{ height: 'auto', width: '40vw', objectFit: 'contain', position: "absolute", right: '-2.5vw' }} />
+                                    </Fade>              
+                                </div>
+                                : null
+                            }
                             <div className="flex alignleft alignstart">
                                 <p>Invitez vos clients à télécharger l'application mobile en scannant le sticker disponible sur votre vitrine <i className="silver smaller">(offert pour la souscription à une licence professionnelle)</i></p> 
                                 <p>À l'ouverture de l'application, le client renseigne son adresse email et c'est tout... une carte de fidélité dématérialisée est automatiquement créé et vous pouvez tout de suite la créditer, même sans réseau internet !</p>
@@ -176,20 +188,35 @@ class ProsView extends React.Component {
                                 <p>Alors n'hésitez plus, souscrivez à une licence professionnelle Fidelease et offrez à vos clients une expérience de fidélisation innovante et efficace.</p> */}
                             </div>
                         </div>
-                        <div className="flex">
-                            <img alt='' className="img-shadow" src={sticker} style={{ height: 'auto', width: '20vw', objectFit: 'contain' }} />
-                            <img alt='' className="img-shadow" src={physicalCard} style={{ height: 'auto', width: '20vw', objectFit: 'contain', position: "absolute", right: '-2.5vw' }} />
-                                            
-                        </div>
+                        {
+                            Layout.isSmallDevice
+                            ? null
+                            : <div className="flex">
+                                <img alt='' className="img-shadow" src={sticker} style={{ height: 'auto', width: '20vw', objectFit: 'contain' }} />
+                                <img alt='' className="img-shadow" src={physicalCard} style={{ height: 'auto', width: '20vw', objectFit: 'contain', position: "absolute", right: '-2.5vw' }} />
+                                                
+                            </div>
+                        }
                     </div>
                 </Fade>
                 <Fade left>
                     <div className="flex row width95">
-                        <div className="flex">
-                            <img alt='' className="img-shadow" src={newOffer} style={{ height: 'auto', width: '15vw', objectFit: 'contain' }} />
-                        </div>
+                        {
+                            Layout.isSmallDevice
+                            ? null
+                            : <div className="flex">
+                                <img alt='' className="img-shadow" src={newOffer} style={{ height: 'auto', width: '15vw', objectFit: 'contain' }} />
+                            </div>
+                        }
                         <div className="flex">
                             <div className="xxlarge bold underlined">Offres uniques et personnalisées</div> 
+                            {
+                                Layout.isSmallDevice
+                                ? <div className="flex">
+                                    <img alt='' className="img-shadow" src={newOffer} style={{ height: 'auto', width: '50vw', objectFit: 'contain' }} />
+                                </div>
+                                : null
+                            }
                             <div className="flex alignleft alignstart">
                             <p>Le constat est sans appel, les offres de fidélité sont trop souvent similaires et limitées.</p>
                             <p> Avec Fidelease, vous vous démarquez en proposant des offres inédites à votre image. </p>
@@ -206,6 +233,15 @@ class ProsView extends React.Component {
                     
                         <div className="flex">
                             <div className="xxlarge bold underlined">Fichier client</div> 
+                            {
+                                Layout.isSmallDevice
+                                ? <div className="flex row">
+                                    <img alt='' className="img-shadow" src={customerFile} style={{ height: 'auto', width: '35vw', objectFit: 'contain' }} />
+                                    &nbsp;
+                                    <img alt='' className="img-shadow" src={txsView} style={{ height: 'auto', width: '35vw', objectFit: 'contain' }} />
+                                </div>
+                                : null
+                            }
                             <div className="flex alignleft alignstart">
                                 <p>Vos clients fidélisés sont réunis dans une même liste.</p> 
                                 <p>Une section de recherche vous permet de retrouver rapidement les informations relatives à un client et même de réaliser une transaction sans avoir à scanner son QR-Code.</p>
@@ -213,23 +249,40 @@ class ProsView extends React.Component {
                             </div>
                         </div>
 
-                        <div className="flex row">
-                            <img alt='' className="img-shadow" src={customerFile} style={{ height: 'auto', width: '15vw', objectFit: 'contain' }} />
-                            &nbsp;
-                            <img alt='' className="img-shadow" src={txsView} style={{ height: 'auto', width: '15vw', objectFit: 'contain' }} />
-                        </div>
+                        {
+                            Layout.isSmallDevice
+                            ? null
+                            : <div className="flex row">
+                                <img alt='' className="img-shadow" src={customerFile} style={{ height: 'auto', width: '15vw', objectFit: 'contain' }} />
+                                &nbsp;
+                                <img alt='' className="img-shadow" src={txsView} style={{ height: 'auto', width: '15vw', objectFit: 'contain' }} />
+                            </div>
+                        }
                     </div>
                 </Fade>
                 <Fade left>
                     <div className="flex row width95">
-                        <div className="flex row">
-                            <img alt='' className="img-shadow" src={statisticsView} style={{ height: 'auto', width: '15vw', objectFit: 'contain' }} />
-                            &nbsp;
-                            <img alt='' className="img-shadow" src={numStatsView} style={{ height: 'auto', width: '15vw', objectFit: 'contain' }} />
-                        </div>
+                        {
+                            Layout.isSmallDevice
+                            ? null
+                            : <div className="flex row">
+                                <img alt='' className="img-shadow" src={statisticsView} style={{ height: 'auto', width: '15vw', objectFit: 'contain' }} />
+                                &nbsp;
+                                <img alt='' className="img-shadow" src={numStatsView} style={{ height: 'auto', width: '15vw', objectFit: 'contain' }} />
+                            </div>
+                        }
 
                         <div className="flex">
                             <div className="xxlarge bold underlined">Statistiques</div> 
+                            {
+                                Layout.isSmallDevice
+                                ? <div className="flex row">
+                                    <img alt='' className="img-shadow" src={statisticsView} style={{ height: 'auto', width: '35vw', objectFit: 'contain' }} />
+                                    &nbsp;
+                                    <img alt='' className="img-shadow" src={numStatsView} style={{ height: 'auto', width: '35vw', objectFit: 'contain' }} />
+                                </div>
+                                : null
+                            }
                             <div className="flex alignleft alignstart">
                                 <p>Les statistiques sont des données qui vont devenir précieuses à vos yeux !</p>
                                 <p>La numérisation de vos passages clients et du soldes de leurs points, combinée avec la valeur de vos offres permet un fantastique cocktail de datas s'avérant utile à l'exploitation de votre commerce.</p>
@@ -239,7 +292,7 @@ class ProsView extends React.Component {
                                 <p>
                                     Vous trouvez la soirée un peu calme par rapport à l'accoutumé ? Consultez Fidelease, confirmez votre observation via les statistiques et agissez ! Ajoutez une offre temporaire alléchante, vos clients sont immédiatement informé...
                                     <br />
-                                    Bravo ! Vous venez de sauver le chiffre de votre journée !
+                                    Félicitations ! Vous venez de sauver le chiffre de votre journée !
                                 </p>
                             </div>
                         </div>
@@ -270,13 +323,14 @@ class ProsView extends React.Component {
 
                 </p>
 
-                <div className="flexy alignstart width80">
+                <div className={`flexy alignstart ${Layout.isSmallDevice ? 'width95' : 'width80'}`}>
                 <div className="flexy allwidth marged-t">Pour en profiter, veuillez remplir le formulaire suivant :</div>
                     <Input
                         wrapperClassName="flexy allwidth"
                         inputProps={{
                             placeholder: 'Dénomination de votre entreprise',
-                            className: "app-input width50",
+                            // className: "app-input width50",
+                            className: `app-input ${Layout.isSmallDevice ? 'width95' : 'width50'}`,
                             onChange: e => this.setTester({ cieName: e.target.value })
 
                         }}
@@ -287,7 +341,7 @@ class ProsView extends React.Component {
                         wrapperClassName="flexy allwidth"
                         inputProps={{
                             placeholder: 'Adresse email de connexion',
-                            className: "app-input width50",
+                            className: `app-input ${Layout.isSmallDevice ? 'width95' : 'width50'}`,
                             onChange: e => this.setTester({ email: e.target.value })
 
                         }}
@@ -298,7 +352,7 @@ class ProsView extends React.Component {
                         wrapperClassName="flexy allwidth"
                         inputProps={{
                             placeholder: 'Numéro de téléphone où vous joindre',
-                            className: "app-input width50",
+                            className: `app-input ${Layout.isSmallDevice ? 'width95' : 'width50'}`,
                             onChange: e => this.setTester({ phoneNumber: e.target.value })
 
                         }}
@@ -306,8 +360,8 @@ class ProsView extends React.Component {
                     />
 
                     <div className="allwidth flexy">
-                        <div className="flexy bordered silverborder" style={{marginTop: '2%', width: '49%', marginLeft: '1%'}}>
-                            <div className="xlarge marged-b allwidth">Avez-vous actuellement un programme de fidélisation en place ?</div>
+                        <div className="flexy bordered silverborder" style={{marginTop: '2%', width: Layout.isSmallDevice ? '90%' : '49%', marginLeft: '1%'}}>
+                            <div className={`${Layout.isSmallDevice ? 'large' : 'xlarge'} marged-b allwidth`}>Avez-vous actuellement un programme de fidélisation en place ?</div>
                             <div className="flex row allwidth">
                                 <div className="flexy row flexdot5 bold">
                                     Oui : <input 
@@ -337,7 +391,7 @@ class ProsView extends React.Component {
                     <div className="flexy allwidth marged-t">
                         <Button
                             title="Envoyer ma demande"
-                            className="large width20 marged-t"
+                            className={`large ${Layout.isSmallDevice ? 'width50' : 'width20'} marged-t`}
                             onClick={this.sendTesterRequest}
                         />
                     </div>
