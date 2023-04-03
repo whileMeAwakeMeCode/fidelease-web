@@ -1,6 +1,6 @@
 import { Fade } from "react-reveal";
-import { BsCalendar3, BsCheckLg, BsCreditCard2Front, BsShop } from 'react-icons/bs';
-import { MdOutlineBlurCircular, MdOutlineClose, MdOutlinePhonelinkRing, MdOutlineVolunteerActivism } from 'react-icons/md';
+import { BsCalendar3, BsCreditCard2Front, BsShop } from 'react-icons/bs';
+import { MdOutlineBlurCircular, MdOutlinePhonelinkRing, MdOutlineVolunteerActivism } from 'react-icons/md';
 import { AiFillPieChart, AiOutlineMail, AiOutlineNotification } from 'react-icons/ai';
 import { RiMoneyEuroCircleLine, RiTimerLine } from 'react-icons/ri';
 import { BiMobileAlt, BiTransfer } from 'react-icons/bi';
@@ -21,51 +21,13 @@ import txsView from './images/txs_view.png';
 
 
 
-import { secondary, section2, section3, section4 } from "./constants";
+import { section2, section3, section4 } from "./constants";
 import { fetchApi, smoothScroll } from './utils';
 import Button from "./Button";
 import React from "react";
 import { ItemRow } from "./ItemRow";
 import { Input } from "./Input";
 
-
-// const Check = () => <BsCheckLg color={secondary} />
-// const Uncheck = () => <MdOutlineClose size={30} color='red' />
-// const Input = ({
-//     icon,
-//     inputProps,
-//     wrapperClassName
-// }) => <div className={`flexy row ${wrapperClassName||''}`} style={{marginTop: '2%'}}>
-//     <input {...inputProps} />
-//     {
-//         icon
-//         ? <span style={{marginLeft: '-3%'}}>{ icon || null }</span>
-//         : null
-//     }
-// </div>
-
-// const ItemRow = ({
-//     title,
-//     icon,
-//     checks,
-//     keyValue
-// }) => <div key={keyValue} className="flex row allspace" style={{ height: '5vh'}}>
-//     <div className="flex row flexdot4 justifystart">{icon} &nbsp; { title }</div>
-//     <div className="flex flexdot3" style={{borderRight: '1px solid silver', borderLeft: '1px solid silver'}}>
-//         {
-//             checks[0]
-//             ? <Check />
-//             : <Uncheck />
-//         }
-//     </div>
-//     <div className="flex flexdot3">
-//         {
-//             checks[1]
-//             ? <Check />
-//             : <Uncheck />
-//         }
-//     </div>
-// </div>
 
 /* SECTION 2 */
 
@@ -79,17 +41,12 @@ class ProsView extends React.Component {
 
     sendTesterRequest = async() => {
        
-        console.log('SENDING TESTER REQUEST for tester', this.state.tester);
-
         const { response, error, status } = await fetchApi({
             method: 'POST',
             route: 'REQUEST_TESTER_ACCOUNT',        // HERE
             body: this.state.tester
         });
 
-        
-
-        console.log('REQUEST_TEST_ACCOUNT', response, error, status);
         if (status === 200) {
             this.setState({ tester: {} });
             this.props.setSnack({
@@ -277,7 +234,7 @@ class ProsView extends React.Component {
                                 <p>Les statistiques sont des données qui vont devenir précieuses à vos yeux !</p>
                                 <p>La numérisation de vos passages clients et du soldes de leurs points, combinée avec la valeur de vos offres permet un fantastique cocktail de datas s'avérant utile à l'exploitation de votre commerce.</p>
                                 <p>
-                                    Le calcul de l'affluence permet d'avoir une idée de la fréquentation de votre établissement sur une période donnée par rapport à votre moyenne caclulée sur le total de votre activité.
+                                    Le calcul de l'affluence permet d'avoir une idée de la fréquentation de votre établissement sur une période donnée par rapport à votre moyenne calculée sur le total de votre activité.
                                 </p>
                                 <p>
                                     Vous trouvez la soirée un peu calme par rapport à l'accoutumé ? Consultez Fidelease, confirmez votre observation via les statistiques et agissez ! Ajoutez une offre temporaire alléchante, vos clients sont immédiatement informé...

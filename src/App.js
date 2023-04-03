@@ -1,6 +1,7 @@
 import logoWhite from './images/logo_alpha_white.png';
 import logo from './images/logo_alpha.png';
 import './App.css';
+import './MobileApp.css';
 import React, { useEffect, useState } from 'react';
 import homeVideo from './assets/home_video_1.mp4';
 import appstore from './images/appstore.png';
@@ -17,13 +18,20 @@ import { Footer } from './Footer';
 import ClientsView from './ClientsView';
 import Button from './Button';
 import { Scanner } from './Scanner';
+import layout from './Layout';
+
+const { isSmallDevice } = layout;
 
 const mainViews = {
   'commercant': props => <ProsView {...props} />,
   'client': props => <ClientsView {...props} />,
 }
 
-const IamButton = ({title, onClick}) => <button onClick={onClick} className='app-button' style={{width: '20vw'}}><span className='smaller'>JE SUIS</span> <br/><span className='bold title'> {title} </span></button>
+const IamButton = ({title, onClick}) => <button onClick={onClick} className='app-button iambutton' style={{width: isSmallDevice ? '40vw' : '20vw'}}>
+  <span className='smaller'>JE SUIS</span>
+  <br/>
+  <span className='bold title'> {title} </span>
+</button>
 
 
 class App extends React.Component {

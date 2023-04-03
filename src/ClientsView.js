@@ -4,10 +4,8 @@ import { Fade } from "react-reveal";
 /* icons */
 import { BsCalendar3, BsCreditCard2Front } from 'react-icons/bs';
 import { MdOutlineBlurCircular, MdOutlinePhonelinkRing, MdOutlineVolunteerActivism } from 'react-icons/md';
-import { AiFillPieChart, AiOutlineNotification } from 'react-icons/ai';
-import { RiMoneyEuroCircleLine, RiTimerLine } from 'react-icons/ri';
+import { AiOutlineNotification } from 'react-icons/ai';
 import { BiTransfer } from 'react-icons/bi';
-import { FaUsers } from 'react-icons/fa';
 import {TbCreditCardOff} from 'react-icons/tb';
 
 /* images */
@@ -15,17 +13,12 @@ import mobileApp from './images/mobile_app_client2.png';
 import fLogo from './images/squared_logo.png';
 import fText from './images/fidelease_text.png';
 import physicalCard from './images/physical_card_handed.png';
-import newOffer from './images/new_offer.png';
-import sticker from './images/sticker.png';
-import customerFile from './images/customer_view.png';
-import statisticsView from './images/statistics_view.png';
-import numStatsView from './images/num_statistics_view.png';
-import txsView from './images/txs_view.png';
 import clientShopsList from './images/client_shops_list.png';
 import { ItemRow } from "./ItemRow";
 import Button from "./Button";
 import { TiInfoLargeOutline } from "react-icons/ti";
 import { smoothScroll } from "./utils";
+import Layout from "./Layout";
 
 
 export default class ClientsView extends Component {
@@ -134,12 +127,12 @@ export default class ClientsView extends Component {
                     <div className="flexy title xxlarge"> Avouez-le, la plupart de vos cartes de fidélité n'ont pas une grande valeur à vos yeux...</div>
                     <div className="flex bold smaller">
                         ÇA VA CHANGER AVEC 
-                        <div className=""><img className="inverted-img" src={fText} style={{width: '15vw', height: 'auto', objectFit: 'contain'}}/></div>
-                        <img alt='' src={clientShopsList} style={{ width: '15vw', height: 'auto', objectFit: 'contain' }} />
+                        <div className=""><img className="inverted-img" src={fText} style={{width: Layout.isSmallDevice ? '30vw' : '15vw', height: 'auto', objectFit: 'contain'}}/></div>
+                        <img alt='' src={clientShopsList} style={{ width: Layout.isSmallDevice ? '50vw' : '15vw', height: 'auto', objectFit: 'contain' }} />
                     </div>
-                    <div className="flex width60">
+                    <div className={`flex ${Layout.isSmallDevice ? 'width80' : 'width60'}`}>
                         {/* Terminé les portefeuilles gonflés de cartes de fidélité, on veut gonfler nos portefeuilles avec du pouvoir d'achat ! */}
-                        <span className="xxlarge">Gonflez vos portefeuilles avec du pouvoir d'achat !</span>
+                        <span className={Layout.isSmallDevice ? 'xlarge' : 'xxlarge'}>Gonflez vos portefeuilles avec du pouvoir d'achat !</span>
                         <br /> 
                         pas avec des dixaines de cartes de fidélité dont l'offre est trop souvent similaire, sans surprise, tellement peu engageante qu'on en oublierait presque de la présenter au commerçant lors de notre passage en caisse !
                     </div>
