@@ -8,4 +8,6 @@ export const section4 = createRef();        // tester view / form
 export const primary = '#2aa8f4';
 export const secondary = '#00dca8';
 
-export const fideleaseApi = 'http://localhost:5000/api';
+export const fideleaseApi_DEV = 'http://localhost:5000/api';
+export const fideleaseApi = 'https://seal-app-vjuwl.ondigitalocean.app/api';
+
